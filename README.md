@@ -50,12 +50,12 @@ The [Project](https://github.com/sharan-naribole/finance-data-exploration/tree/m
     - Stock price data had `$` prefix in most columns
     - Implemented a utility method `convert_dollar_columns_to_numeric` to remove the currency prefix and convert the data type to `numeric` to enable computations.
 - Bonus :star: Sorted the stock price date based on Date
-    - Stock price data was recorded in reverse order of time with latest date on top of DataFrame. Implemented a utility method `sort_date_order` and applied to the stock dataframes.
+    - Stock price data was recorded in reverse order of time with latest date on top of DataFrame. Implemented a utility method `sort_date_order` and applied to the stock DataFrames.
 - Aligned datetime data using `pandas` `offsets` method
     - Aligned the inflation data so that it falls on the last day of the month instead of the first
 - Resampled the Inflation data
-    - Created a new quarterly inflation dataframe by downsampling the monthly inflation data to quarterly using the mean.
-    - Created a new weekly inflation dataframe by upsampling the monthly inflation data. Used `interpolate` `time` method to account for the unequal time difference between monthly inflation data due to the varying number of days in different months.
+    - Created a new quarterly inflation DataFrame by downsampling the monthly inflation data to quarterly using the mean.
+    - Created a new weekly inflation DataFrame by upsampling the monthly inflation data. Used `interpolate` `time` method to account for the unequal time difference between monthly inflation data due to the varying number of days in different months.
 - Standardized the GDP data
     -  Used `scikit-learn` `StandardScaler` approach
     -  Bonus :star: Transformed the GDP data directly using mean and standard deviation.
@@ -87,7 +87,9 @@ Used `matplotlib` and `seaborn` libraries for plotting.
 
 ## Data Storage
 
-To avoid reperforming all the preprocessing steps, exported the processed dataframes to CSV files.
+To avoid reperforming all the preprocessing steps, exported the processed DataFrames to CSV files.
+
+- Implemented a utility method `export_to_csv` to reuse the operation for multiple DataFrames.
 
 ## License
 
