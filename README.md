@@ -1,54 +1,93 @@
-# README Template
+# Udacity AI Trading Strategies: Data Transformation for Trading Models
 
-Below is a template provided for use when building your README file for students.
+This repo is a fork of `udacity/CD13649-Project` repo. The parent repo is part of Udacity AI Trading Strategies Nanodegree Course 3: Preparing for Data Analysis. This repo includes Exercises and skeleton Jupyter notebook for project Data Transformation for Trading Models
 
-# Project Title
+The key modifications in this fork repo include:
+- Updated repo [README](https://github.com/sharan-naribole/finance-data-exploration/blob/main/README.md)
+- Completed Project [Jupyter Notebook](https://github.com/sharan-naribole/finance-data-exploration/blob/main/Project/Preparing-for-data-analysis-project-student.ipynb)
 
-Project description goes here.
+The course project is a an excellent hands-on training in data engineering pipeline using historical financial data including macroeconomic indicators and stock prices.
 
-## Getting Started
+## Project Dependencies
 
-Instructions for how to get a copy of the project running on your local machine.
+### Key depencies
 
-### Dependencies
+- `jupyter`
+- `pandas`
+- `matplotlib`
 
-```
-Examples here
-```
+### Optional Dependencies
 
-### Installation
+- `seaborn`
+- `numpy`
+- `os`
+- `scikit-learn`
+- `datetime`
 
-Step by step explanation of how to get a dev environment running.
+## Trace files
 
-List out the steps
+The [Project](https://github.com/sharan-naribole/finance-data-exploration/tree/main/Project) directory includes pre-loaded trace files in CSV format.
 
-```
-Give an example here
-```
+- GDP quarterly data
+- Inflation monthly data
+- Apple and Microsoft daily stock price info
+    - Open
+    - Close
+    - High
+    - Low
+    - Volume
 
-## Testing
+## Data Preprocessing
 
-Explain the steps needed to run any automated tests
+- Loaded the data into `pandas` DataFrames
+- Bonus :star: Updated the column names for convenience
+    - Inflation column `CORESTICKM159SFRBATL` -> `INFLATION`
+    - Stock price column `Close/Last` -> `Close`
+    - Make all the column names to Title case for consistency
+- Checked for missing data and forward filled missing values
+  - Missing AAPL Closing price data was filled using `ffill` operation
+- Removed special characters and converted to numeric/datetime
+    - Stock price data had `$` prefix in most columns
+    - Implemented a utility method `convert_dollar_columns_to_numeric` to remove the currency prefix and convert the data type to `numeric` to enable computations.
+- Bonus :star: Sorted the stock price date based on Date
+    - Stock price data was recorded in reverse order of time with latest date on top of DataFrame. Implemented a utility method `sort_date_order` and applied to the stock dataframes.
+- Aligned datetime data using `pandas` `offsets` method
+    - Aligned the inflation data so that it falls on the last day of the month instead of the first
+- Resampled the Inflation data
+    - Created a new quarterly inflation dataframe by downsampling the monthly inflation data to quarterly using the mean.
+    - Created a new weekly inflation dataframe by upsampling the monthly inflation data. Used `interpolate` `time` method to account for the unequal time difference between monthly inflation data due to the varying number of days in different months.
+- Standardized the GDP data
+    -  Used `scikit-learn` `StandardScaler` approach
+    -  Bonus :star: Transformed the GDP data directly using mean and standard deviation.
 
-### Break Down Tests
+## Feature Engineering
+- Bonus :star: Computed the Intra Day Return from daily Opening and Closing price data
+- Computed the daily returns for stock Closing price using `pct_change` method
+- Computed the monthly change in Inflation using `pct_change` method
+- Explored different approaches of Monthly Returns in Stock prices
+    - **Method 1**: Change from first Open price in month to last Close price in the month
+    - **Method 2**: Simple average of computed daily returns across the month
+    - **Method 3**: Compounded monthly returns across the month using computed daily returns
+- Compute correlation matrix between stock price and Inflation data
+- Compute Volatility in stock price by applying `pandas` `rolling` method on Closing price window
+- Bonus :star: Compute correlation between rolling volatility and stock price
 
-Explain what each test does and why
+## Exploratory Data Analysis
 
-```
-Examples here
-```
+Used `matplotlib` and `seaborn` libraries for plotting.
 
-## Project Instructions
+- Filtered stock price data for last 3 months using `pandas` `DateOffset`
+- Plotted time series of adjusted open vs close price
 
-This section should contain all the student deliverables for this project.
+- Bonus :star: Plotted and analyzed histogram of Intra day returns
+- Plotted histogram of Closing Price 
+- Plotted correlation matrix of stock price and inflation as heatmap
+- Plotted Volatility and Close price on the same plot with different Y-axis
+- Plotted correlation matrix between Volatility and Close price
 
-## Built With
+## Data Storage
 
-* [Item1](www.item1.com) - Description of item
-* [Item2](www.item2.com) - Description of item
-* [Item3](www.item3.com) - Description of item
-
-Include all items used to build project.
+To avoid reperforming all the preprocessing steps, exported the processed dataframes to CSV files.
 
 ## License
 
