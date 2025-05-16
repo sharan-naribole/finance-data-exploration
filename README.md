@@ -10,7 +10,7 @@ The course project is a an excellent hands-on training in data engineering pipel
 
 ## Project Dependencies
 
-### Key depencies
+### Key dependencies
 
 - `jupyter`
 - `pandas`
