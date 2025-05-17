@@ -6,7 +6,7 @@ The key modifications in this fork repo include:
 - Updated repo [README](https://github.com/sharan-naribole/finance-data-exploration/blob/main/README.md)
 - Completed Project [Jupyter Notebook](https://github.com/sharan-naribole/finance-data-exploration/blob/main/Project/Preparing-for-data-analysis-project-student.ipynb)
 
-The course project is a an excellent hands-on training in data engineering pipeline using historical financial data including macroeconomic indicators and stock prices.
+The course project offers a highly practical experience in constructing data engineering pipelines, utilizing historical financial datasets including macroeconomic indicators and equity market data.
 
 ## Project Dependencies
 
